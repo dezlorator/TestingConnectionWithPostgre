@@ -18,15 +18,19 @@ namespace TestingConnectionWithPostgre.Controllers
         {
             _context = context;
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> CreatePerson()
+        public async Task<IActionResult> CreatePerson([FromBody]Person person)
         {
-            var person = new Person { Address = "hoho", City = "Dnipro", FirstName = "Vasyan", LastName = "Pupkin" };
+            if (person == null || person.FirstName == null || person.LastName == null)
+            {
+                person = new Person { Address = "hoho", City = "Dnipro", FirstName = "Vasyan", LastName = "Pupkin" };
+            }
+            
             _context.Persons.Add(person);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(person);
         }
 
         [HttpGet]

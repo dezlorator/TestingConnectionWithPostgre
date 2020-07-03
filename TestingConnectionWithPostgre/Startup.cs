@@ -42,7 +42,9 @@ namespace TestingConnectionWithPostgre
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Person}/{action=Get}/{id?}");
             });
         }
     }
