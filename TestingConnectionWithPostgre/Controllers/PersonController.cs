@@ -28,5 +28,13 @@ namespace TestingConnectionWithPostgre.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var persons = _context.Persons.ToList();
+
+            return Ok(persons);
+        }
     }
 }
