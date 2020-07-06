@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xero.NetStandard.OAuth2.Model.Accounting;
 using Xero.NetStandard.OAuth2.Token;
 
 namespace TestingConnectionWithPostgre.Services
@@ -10,5 +11,6 @@ namespace TestingConnectionWithPostgre.Services
     {
         string GetLoginUrl();
         Task<IXeroToken> GetTokensAsync(string code, string state);
+        Task<Invoices> GetAccounts();
     }
 }

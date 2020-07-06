@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Tenant = Xero.NetStandard.OAuth2.Models.Tenant;
 using Microsoft.Extensions.Options;
+using Xero.NetStandard.OAuth2.Api;
+using Xero.NetStandard.OAuth2.Model.Accounting;
 
 namespace TestingConnectionWithPostgre.Services
 {
@@ -46,6 +48,13 @@ namespace TestingConnectionWithPostgre.Services
 
             _xeroToken.Tenants = tenants;
             return _xeroToken;
+        }
+
+        public async Task<Invoices> GetAccounts()
+        {
+            var accountingApi = new AccountingApi();
+            var response = await accountingApi.GetInvoicesAsync(_xeroToken.AccessToken, _xeroToken.Tenants[0].TenantId.ToString());
+            return response;
         }
     }
 }

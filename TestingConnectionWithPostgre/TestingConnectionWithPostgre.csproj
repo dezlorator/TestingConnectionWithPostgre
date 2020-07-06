@@ -17,9 +17,5 @@
     <PackageReference Include="Xero.NetStandard.OAuth2Client" Version="0.0.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Xero\" />
-  </ItemGroup>
-
 
 </Project>

@@ -37,5 +37,13 @@ namespace TestingConnectionWithPostgre.Controllers
 
             return Ok(token);
         }
+
+        [HttpGet("accounts")]
+        public async Task<IActionResult> Accounts()
+        {
+            var token = await _xeroService.GetAccounts();
+
+            return Ok(token);
+        }
     }
 }
