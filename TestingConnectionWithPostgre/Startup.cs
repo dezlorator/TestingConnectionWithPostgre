@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TestingConnectionWithPostgre.Models;
+using TestingConnectionWithPostgre.Services;
+using Xero.NetStandard.OAuth2.Config;
 
 namespace TestingConnectionWithPostgre
 {
@@ -20,6 +22,9 @@ namespace TestingConnectionWithPostgre
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient<IXeroService, XeroService>();
+            services.AddScoped<IXeroService, XeroService>();
+            services.Configure<XeroConfiguration>(Configuration.GetSection("Xero"));
             services.AddControllers();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>(
