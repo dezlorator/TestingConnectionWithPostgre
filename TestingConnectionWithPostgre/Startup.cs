@@ -12,6 +12,8 @@ namespace TestingConnectionWithPostgre
 {
     public class Startup
     {
+        private const string CORSPolicyName = "defaultPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +28,8 @@ namespace TestingConnectionWithPostgre
             services.AddScoped<IXeroService, XeroService>();
             services.Configure<XeroConfiguration>(Configuration.GetSection("DanilXero"));
             services.AddControllers();
+            services.AddCors(options => options.AddPolicy(CORSPolicyName,
+                    builder => builder.WithOrigins("http://localhost:3000")));
 
             services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>(
                 opt => opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConnection")));
@@ -38,6 +42,7 @@ namespace TestingConnectionWithPostgre
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(CORSPolicyName);
 
             app.UseHttpsRedirection();
 
