@@ -24,7 +24,7 @@ namespace TestingConnectionWithPostgre
         {
             services.AddHttpClient<IXeroService, XeroService>();
             services.AddScoped<IXeroService, XeroService>();
-            services.Configure<XeroConfiguration>(Configuration.GetSection("Xero"));
+            services.Configure<XeroConfiguration>(Configuration.GetSection("DanilXero"));
             services.AddControllers();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>(
